@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Feirão do Sapato | Centro de Itanhaém</title>
+    <style>
+        :root {
+            --primary-red: #cc1818;
+            --primary-yellow: #facc15;
+            --wood-dark: #0f172a;
+            --bg-fresh: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-green: #25d366;
+            --white: #ffffff;
+            --google-stars: #fbbc04;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Configurações do Chat */
+            --wa-green-dark: #075e54;
+            --wa-green-light: #128c7e;
+            --wa-bg: #efeae2;
+            --wa-bubble-bot: #ffffff;
+            --wa-bubble-user: #d9fdd3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-fresh);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary-red);
+        }
+
+        .brand span { color: var(--wood-dark); }
+
+        .btn-nav-whatsapp {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-nav-whatsapp:hover { background-color: var(--wood-dark); }
+
+        .hero {
+            padding: 15rem 1.5rem 11rem 1.5rem;
+            background: linear-gradient(
+                to bottom, 
+                rgba(15, 23, 42, 0.85) 0%, 
+                rgba(15, 23, 42, 0.6) 60%, 
+                rgba(248, 250, 252, 1) 100%
+            ), url('img.jpg') no-repeat center center/cover;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.25;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 3rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-hero-action {
+            background-color: var(--accent-green);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 15px -3px rgba(22, 163, 74, 0.3);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-hero-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(22, 163, 74, 0.4);
+        }
+
+        .gallery-section {
+            padding: 5rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--wood-dark);
+            font-weight: 800;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            border-radius: 12px;
+        }
+
+        .carousel-container::-webkit-scrollbar { display: none; }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            position: relative;
+            aspect-ratio: 16 / 10;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        .btn-prev { left: 20px; }
+        .btn-next { right: 20px; }
+
+        .reviews-section {
+            padding: 5rem 1.5rem;
+            background-color: var(--white);
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-reviews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: var(--bg-fresh);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .review-avatar {
+            width: 44px;
+            height: 44px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .review-user-info h4 {
+            font-size: 0.95rem;
+            color: var(--wood-dark);
+        }
+
+        .review-user-info span {
+            font-size: 0.75rem;
+            color: var(--primary-red);
+            font-weight: 600;
+            display: block;
+        }
+
+        .review-stars {
+            color: var(--google-stars);
+            margin-bottom: 0.8rem;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .review-tag {
+            display: inline-block;
+            background: rgba(204, 24, 24, 0.08);
+            color: var(--primary-red);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .location-section {
+            background-color: var(--white);
+            padding: 5rem 1.5rem;
+        }
+
+        .location-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .location-box h3 {
+            color: var(--wood-dark);
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .btn-route {
+            background-color: var(--wood-dark);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .btn-route:hover { background-color: var(--primary-red); }
+
+        .btn-footer-wa {
+            background-color: var(--accent-green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .btn-footer-wa:hover { background-color: var(--wa-green-dark); }
+
+        footer {
+            background-color: var(--white);
+            color: var(--text-muted);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Widget WhatsApp */
+        .wa-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 2500;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .wa-trigger-btn {
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .wa-trigger-btn:hover { transform: scale(1.08); }
+
+        .wa-trigger-btn svg { width: 34px; height: 34px; fill: white; }
+
+        .wa-box {
+            width: 360px;
+            max-width: 88vw;
+            height: 500px;
+            background-color: var(--wa-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            animation: waPop 0.25s ease-out;
+        }
+
+        @keyframes waPop {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .wa-header {
+            background-color: var(--wa-green-dark);
+            color: white;
+            padding: 0.85rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wa-header-profile { display: flex; align-items: center; gap: 12px; }
+
+        .wa-header-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--wa-green-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .wa-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .wa-messages-container {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .wa-bubble {
+            max-width: 85%;
+            padding: 7px 12px;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+        }
+
+        .wa-bubble.bot {
+            background-color: var(--wa-bubble-bot);
+            align-self: flex-start;
+            border-radius: 0 8px 8px 8px;
+        }
+
+        .wa-bubble.user {
+            background-color: var(--wa-bubble-user);
+            align-self: flex-end;
+            border-radius: 8px 0 8px 8px;
+        }
+
+        .wa-options-wrapper { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+
+        .wa-option-item {
+            background-color: white;
+            border: 1px solid #e1e9eb;
+            color: #0284c7;
+            padding: 0.65rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .wa-footer-input {
+            background-color: #f0f0f0;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wa-input-container {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 24px;
+            padding: 4px 12px;
+        }
+
+        .wa-footer-input input {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 6px 0;
+            background: transparent;
+        }
+
+        .wa-send-action-btn {
+            background-color: var(--wa-green-dark);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wa-send-action-btn svg { width: 18px; height: 18px; fill: white; margin-left: 2px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.3rem; }
+            .hero { padding-top: 12rem; }
+            .grid-reviews { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="brand">O Feirão<span>Do Sapato</span></div>
+            <button onclick="toggleWhatsAppChat()" class="btn-nav-whatsapp">Ver Estoque</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Sapatos e Sandálias no Carnézinho</span>
+            <h1>Calçados com preço excelente e aprovação rápida na hora</h1>
+            <p>Encontre a maior facilidade de crediário da região central. Compre no carnê mesmo com nome sujo e garanta modelos para toda a família sem juros.</p>
+            <button onclick="toggleWhatsAppChat()" class="btn-hero-action">
+                <span>Pedir Fotos de Modelos no WhatsApp</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="section-title">
+            <h2>Galeria de Fotos do Feirão</h2>
+            <p>Imagens do nosso salão comercial e estoque local localizado na Rua João Mariano.</p>
+        </div>
+        
+        <div class="carousel-wrapper">
+            <button class="carousel-btn btn-prev" id="prevBtn">❮</button>
+            <div class="carousel-container" id="carouselContainer">
+                <div class="carousel-item"><img src="img.jpg" alt="Fachada Oficial O Feirão do Sapato" loading="lazy"></div>
+                <div class="carousel-item"><img src="img1.jpg" alt="Interior da Loja e Prateleiras de Vidro" loading="lazy"></div>
+                <div class="carousel-item"><img src="img3.jpg" alt="Gôndolas de Ofertas e Liquidação de Pontas" loading="lazy"></div>
+                <div class="carousel-item"><img src="img2.jpg" alt="Cartaz de Boas Festas e Contatos Oficiais" loading="lazy"></div>
+            </div>
+            <button class="carousel-btn btn-next" id="nextBtn">❯</button>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="reviews-container">
+            <div class="section-title">
+                <h2>Avaliações Verificadas no Maps</h2>
+                <p>Nossos clientes destacam as vantagens do crediário próprio do Feirão.</p>
+            </div>
+
+            <div class="grid-reviews">
+                <div class="review-card">
+                    <div>
+                        <div class="review-header">
+                            <div class="review-avatar">AB</div>
+                            <div class="review-user-info">
+                                <h4>Adrieli Brasil</h4>
+                                <span>Local Guide</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Preço ótimo aprova rápido pra comprar no carne mesmo tendo nome sujo e não tem juros"</p>
+                    </div>
+                    <div><span class="review-tag">Nome Sujo Aprovado</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="review-header">
+                            <div class="review-avatar" style="background-color: #059669;">CL</div>
+                            <div class="review-user-info">
+                                <h4>Carla Fernanda Lores</h4>
+                                <span>Cliente Fiel</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Minha experiência com a loja foi ótima! Ótimas vendedoras... Está melhor do que a Kallan tanto nos preços quanto no atendimento e o crediário é rápido e fácil!"</p>
+                    </div>
+                    <div><span class="review-tag">Melhor que a Kallan</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="review-header">
+                            <div class="review-avatar" style="background-color: #4f46e5;">MF</div>
+                            <div class="review-user-info">
+                                <h4>Miro Fortunato</h4>
+                                <span>Consumidor Local</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"A loja está linda e os preços muito bom"</p>
+                    </div>
+                    <div><span class="review-tag">Preço Baixo</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="location-section">
+        <div class="location-container">
+            <div class="location-box">
+                <h3>Onde Fica a Loja</h3>
+                <p>Rua João Mariano, 182 - Centro</p>
+                <p>Itanhaém - SP, 11740-000</p>
+                <a href="https://maps.google.com/?q=O+Feirao+do+Sapato+Rua+Joao+Mariano+182+Itanhaem" target="_blank" class="btn-route">
+                    <span>Abrir Rota no Google Maps</span>
+                </a>
+            </div>
+            <div class="location-box">
+                <h3>Horários de Atendimento</h3>
+                <p>Segunda a Sábado: 09:00 às 18:00</p>
+                <p>Domingos e Feriados: Fechado</p>
+            </div>
+            <div class="location-box">
+                <h3>Nossos Telefones</h3>
+                <p>WhatsApp Comercial: (13) 99781-8935</p>
+                <p>Telefone Fixo Comercial: (13) 3422-5987</p>
+                <a href="https://api.whatsapp.com/send?phone=5513997818935&text=Olá!+Gostaria+de+consultar+os+modelos+de+calçados." target="_blank" class="btn-footer-wa">Chamar no WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="wa-widget">
+        <div class="wa-box" id="whatsappBox">
+            <div class="wa-header">
+                <div class="wa-header-profile">
+                    <div class="wa-header-avatar">👟</div>
+                    <div class="wa-header-text">
+                        <h5>O Feirão do Sapato</h5>
+                        <span>Online no Balcão</span>
+                    </div>
+                </div>
+                <button class="wa-close-btn" onclick="toggleWhatsAppChat()">×</button>
+            </div>
+            
+            <div class="wa-messages-container" id="whatsappMessages"></div>
+            
+            <div class="wa-footer-input">
+                <div class="wa-input-container">
+                    <input type="text" id="whatsappInputField" placeholder="Digite seu nome primeiro..." disabled>
+                </div>
+                <button class="wa-send-action-btn" id="whatsappSendBtn" disabled>
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <button class="wa-trigger-btn" onclick="toggleWhatsAppChat()">
+            <svg viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.458L0 24zM6.574 19.601l.412.244c1.543.916 3.312 1.4 5.122 1.401 5.485 0 9.948-4.464 9.951-9.952.002-2.66-1.033-5.159-2.912-7.04C17.262 2.373 14.766 1.337 12.01 1.337c-5.49 0-9.956 4.467-9.959 9.955-.001 1.887.491 3.73 1.425 5.362l.27.472-1.002 3.662 3.753-.984zM17.803 14.51c-.318-.16-1.884-.93-2.179-1.037-.295-.107-.51-.16-.723.16-.214.32-.827 1.037-1.012 1.251-.186.213-.372.24-.69.08-.317-.16-1.341-.495-2.556-1.579-.945-.844-1.583-1.886-1.769-2.205-.186-.32-.02-.493.14-.652.143-.143.318-.373.477-.56.159-.187.213-.32.318-.534.106-.214.053-.4-.027-.56-.08-.16-.723-1.744-.99-2.387-.26-.625-.526-.54-.723-.55-.187-.01-.403-.012-.619-.012-.216 0-.568.08-.865.405-.297.325-1.135 1.11-1.135 2.705s1.16 3.137 1.321 3.353c.162.214 2.284 3.488 5.534 4.894.773.334 1.377.534 1.848.684.777.247 1.484.212 2.043.129.622-.093 1.884-.77 2.148-1.475.264-.705.264-1.308.186-1.436-.079-.127-.296-.204-.614-.364z"/>
+            </svg>
+        </button>
+    </div>
+
+    <footer>
+        <p>© 2026 O Feirão do Sapato • Itanhaém - SP. Estrutura com acessibilidade física e pagamentos por NFC/Cartões.</p>
+    </footer>
+
+    <script>
+        const container = document.getElementById('carouselContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        nextBtn.addEventListener('click', () => { container.scrollBy({ left: container.clientWidth, behavior: 'smooth' }); });
+        prevBtn.addEventListener('click', () => { container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' }); });
+
+        // Número de telefone parametrizado de forma global
+        const celularWhatsApp = "5513997818935"; 
+        const waBox = document.getElementById('whatsappBox');
+        const waMessages = document.getElementById('whatsappMessages');
+        const waInput = document.getElementById('whatsappInputField');
+        const waSendBtn = document.getElementById('whatsappSendBtn');
+
+        let waState = 0; 
+        let waData = { nome: "", servico: "" };
+
+        function toggleWhatsAppChat() {
+            if (waBox.style.display === 'none' || waBox.style.display === '') {
+                waBox.style.display = 'flex';
+                if (waState === 0) rodarFluxoWhatsApp();
+            } else {
+                waBox.style.display = 'none';
+            }
+        }
+
+        function createBubble(text, side) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('wa-bubble', side);
+            bubble.innerHTML = text;
+            waMessages.appendChild(bubble);
+            waMessages.scrollTop = waMessages.scrollHeight;
+        }
+
+        function rodarFluxoWhatsApp() {
+            waState = 1;
+            createBubble("Olá! Bem-vindo ao canal direto do **Feirão do Sapato** no Centro! 👟", "bot");
+            setTimeout(() => {
+                createBubble("Para iniciarmos a busca de modelos no estoque, qual é o seu **nome**?", "bot");
+                waInput.disabled = false; waSendBtn.disabled = false; waInput.focus();
+            }, 600);
+        }
+
+        function processarInputMensagem(texto) {
+            if (!texto.trim()) return;
+            createBubble(texto, "user");
+
+            if (waState === 1) {
+                waData.nome = texto;
+                waInput.disabled = true; waSendBtn.disabled = true; waInput.value = "";
+                waState = 2;
+                
+                setTimeout(() => {
+                    createBubble(`Perfeito, ${waData.nome}! Escolha abaixo o que você deseja consultar agora:`, "bot");
+                    renderizarOpcoesServico();
+                }, 600);
+            }
+        }
+
+        function renderizarOpcoesServico() {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('wa-options-wrapper');
+            const opcoes = ["Pedir Fotos de Modelos no meu Tamanho", "Iniciar Pré-Cadastro do Carnê", "Saber sobre Troca de Calçados"];
+            opcoes.forEach(item => {
+                const botao = document.createElement('button');
+                botao.classList.add('wa-option-item');
+                botao.innerText = item;
+                botao.onclick = () => {
+                    wrapper.remove();
+                    createBubble(item, "user");
+                    waData.servico = item;
+                    concluirFiltroWhatsApp();
+                };
+                wrapper.appendChild(botao);
+            });
+            waMessages.appendChild(wrapper);
+            waMessages.scrollTop = waMessages.scrollHeight;
+        }
+
+        function concluirFiltroWhatsApp() {
+            setTimeout(() => {
+                createBubble("Pronto! Clique abaixo para enviar sua solicitação diretamente para o celular das nossas atendentes no salão.", "bot");
+                
+                const wrapper = document.createElement('div');
+                wrapper.classList.add('wa-options-wrapper');
+                
+                const btnLink = document.createElement('button');
+                btnLink.classList.add('wa-option-item');
+                btnLink.style.backgroundColor = "#25d366";
+                btnLink.style.color = "white";
+                btnLink.style.textAlign = "center";
+                btnLink.style.fontWeight = "700";
+                btnLink.innerText = "Chamar Atendente no Salão";
+                
+                const payloadMsg = encodeURIComponent(
+                    `*SITE - CONSULTA DE ESTOQUE FEIRÃO*\n\n` +
+                    `• *Nome do Cliente:* ${waData.nome}\n` +
+                    `• *Interesse Imediato:* ${waData.servico}\n\n` +
+                    `Olá, gostaria de verificar a disponibilidade e modelos.`
+                );
+                
+                btnLink.onclick = () => {
+                    window.open(`https://api.whatsapp.com/send?phone=${celularWhatsApp}&text=${payloadMsg}`, '_blank');
+                    waState = 0; waMessages.innerHTML = ""; toggleWhatsAppChat();
+                };
+                
+                wrapper.appendChild(btnLink);
+                waMessages.appendChild(wrapper);
+                waMessages.scrollTop = waMessages.scrollHeight;
+            }, 600);
+        }
+
+        waSendBtn.addEventListener('click', () => processarInputMensagem(waInput.value));
+        waInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') processarInputMensagem(waInput.value); });
+    </script>
+</body>
+</html>
