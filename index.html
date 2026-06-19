@@ -11,6 +11,7 @@
             --dark-color: #1a1a1a;
             --light-color: #f4f4f4;
             --text-color: #333;
+            --whatsapp-color: #25d366;
         }
 
         * {
@@ -24,36 +25,84 @@
             background-color: var(--light-color);
             color: var(--text-color);
             line-height: 1.6;
+            padding-bottom: 60px; /* Evita que o botão flutuante cubra conteúdo no mobile */
         }
 
+        /* Topo da Página / Identidade */
         header {
             background-color: var(--primary-color);
             color: white;
-            padding: 15px 20px;
+            padding: 20px;
             text-align: center;
-            border-bottom: 4px solid var(--secondary-color);
+            border-bottom: 5px solid var(--secondary-color);
+            position: relative;
         }
 
         header h1 {
-            font-size: 24px;
+            font-size: 28px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         header p {
-            font-size: 14px;
+            font-size: 15px;
             color: var(--secondary-color);
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* BANNER FIXO DE TOPO (Fachada da Loja) */
+        .top-hero-banner {
+            width: 100%;
+            max-height: 250px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 3px solid var(--dark-color);
+        }
+
+        .top-hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .top-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 15px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+            font-size: 16px;
+        }
+
+        /* Seção do Carrossel Dinâmico */
+        .carousel-section-title {
+            text-align: center;
+            margin: 25px auto 10px auto;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 18px;
             font-weight: bold;
         }
 
-        /* Container do Carrossel */
         .carousel-container {
             max-width: 800px;
-            margin: 20px auto;
+            margin: 0 auto 20px auto;
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             background: #fff;
+            border: 2px solid var(--secondary-color);
         }
 
         .carousel-slides {
@@ -81,35 +130,36 @@
         .slide-caption {
             position: absolute;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             color: #fff;
             width: 100%;
-            padding: 10px 15px;
+            padding: 12px 15px;
             text-align: center;
             font-size: 14px;
             border-top: 2px solid var(--secondary-color);
         }
 
-        /* Botões de Navegação */
+        /* Botões de Navegação Manual */
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(204, 0, 0, 0.8);
+            background: rgba(204, 0, 0, 0.85);
             color: white;
             border: none;
             padding: 12px 16px;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 50%;
             z-index: 10;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
         }
 
         .carousel-btn:hover {
             background: var(--dark-color);
             color: var(--secondary-color);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .prev { left: 15px; }
@@ -119,14 +169,15 @@
         .carousel-dots {
             text-align: center;
             padding: 10px 0;
-            background: #fff;
+            background: transparent;
+            margin-bottom: 20px;
         }
 
         .dot {
             cursor: pointer;
-            height: 10px;
-            width: 10px;
-            margin: 0 5px;
+            height: 11px;
+            width: 11px;
+            margin: 0 6px;
             background-color: #bbb;
             border-radius: 50%;
             display: inline-block;
@@ -137,21 +188,29 @@
             background-color: var(--primary-color);
         }
 
-        /* Seção de Recursos / CTA */
+        /* Conteúdo e Cards de Conversão */
         .main-content {
             max-width: 800px;
             margin: 20px auto;
-            padding: 20px;
+            padding: 25px;
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .main-content h2 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            font-size: 20px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
         }
 
         .grid-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 20px;
+            margin-top: 25px;
         }
 
         @media(max-width: 600px) {
@@ -160,31 +219,43 @@
 
         .action-card {
             background: var(--light-color);
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            border-radius: 4px;
+            border-top: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 6px;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .action-card h3 {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .action-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
         }
 
         .btn-cta {
             display: inline-block;
-            background-color: #25d366;
+            background-color: var(--whatsapp-color);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            margin-top: 10px;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .btn-cta:hover {
             background-color: #128c7e;
+            transform: translateY(-2px);
         }
 
         .btn-secondary {
@@ -196,75 +267,134 @@
             background-color: #333;
         }
 
+        /* BOTÃO FLUTUANTE DO WHATSAPP FIXO */
+        .whatsapp-floating {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--whatsapp-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-floating:hover {
+            transform: scale(1.1) rotate(5deg);
+            background-color: #128c7e;
+        }
+
+        .whatsapp-floating svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* Alerta Dinâmico sobre o Botão Flutuante */
+        .floating-badge {
+            position: absolute;
+            top: -5px;
+            right: -2px;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            border: 2px solid white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #666;
+            padding: 25px 20px;
+            font-size: 13px;
+            color: #565656;
             margin-top: 40px;
             background: #e9e9e9;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
 
+    <!-- CABEÇALHO -->
     <header>
         <h1>O Feirão do Sapato</h1>
         <p>A maior variedade de Itanhaém direto no seu celular</p>
     </header>
 
-    <!-- COMPONENTE CARROSSEL DINÂMICO -->
+    <!-- RECURSO MANTIDO: IMAGEM FIXA DA FACHADA NO TOPO (HERO BANNER) -->
+    <div class="top-hero-banner">
+        <img src="img_2.jpg" alt="Fachada O Feirão do Sapato">
+        <div class="top-hero-overlay">
+            <span>Visite nossa loja na Rua João Mariano, 182 - Centro</span>
+        </div>
+    </div>
+
+    <!-- TÍTULO DA VITRINE -->
+    <div class="carousel-section-title">Confira Nossos Destaques e Ofertas</div>
+
+    <!-- RECURSO ATUALIZADO: CARROSSEL DE PRODUTOS/CARNÊS -->
     <div class="carousel-container">
         <div class="carousel-slides" id="carouselSlides">
             
             <div class="slide">
-                <img src="img.jpg" alt="Fachada da Loja">
-                <div class="slide-caption">Bem-vindo ao Feirão do Sapato no Centro de Itanhaém!</div>
+                <img src="img1_2.jpg" alt="Corredor de Calçados">
+                <div class="slide-caption">Variedade Imbatível: Milhares de modelos masculinos, femininos e infantis.</div>
             </div>
 
             <div class="slide">
-                <img src="img1.jpg" alt="Corredor de Calçados">
-                <div class="slide-caption">Milhares de opções em calçados masculinos, femininos e infantis.</div>
-            </div>
-
-            <div class="slide">
-                <img src="img3.jpg" alt="Interior da Loja">
-                <div class="slide-caption">Ambiente amplo e o atendimento que você já conhece.</div>
+                <img src="img3_2.jpg" alt="Interior da Loja">
+                <div class="slide-caption">Ambiente amplo e organizado com atendimento focado em você.</div>
             </div>
 
             <div class="slide">
                 <img src="img4.jpg" alt="Portal de Parcelas e Crediário">
-                <div class="slide-caption">Facilidade no carnê! Parcelas em atraso? Renegocie direto pelo WhatsApp.</div>
+                <div class="slide-caption">Facilidade no carnê! Parcelas em atraso? Renegocie sem juros direto pelo WhatsApp.</div>
             </div>
 
             <div class="slide">
                 <img src="img5.jpg" alt="Tênis Fila">
-                <div class="slide-caption">Linha Esportiva: Tênis Fila de alta performance com o melhor preço.</div>
+                <div class="slide-caption">Linha Esportiva: Tênis Fila de alta performance com condições especiais.</div>
             </div>
 
             <div class="slide">
                 <img src="img6.jpg" alt="Casaco Puffer Rosa">
-                <div class="slide-caption">Coleção Outono/Inverno: Casacos Puffer com capuz de pele.</div>
+                <div class="slide-caption">Moda Outono/Inverno: Casacos Puffer acolchoados e super confortáveis.</div>
             </div>
 
             <div class="slide">
                 <img src="img7.jpg" alt="Jaqueta Infantil Masculina">
-                <div class="slide-caption">Moda Infantil: Jaquetas acolchoadas a partir de 10x de R$ 14,90.</div>
+                <div class="slide-caption">Moda Infantil: Proteção e estilo para os pequenos a partir de 10x de R$ 14,90.</div>
             </div>
 
             <div class="slide">
                 <img src="img8.jpg" alt="Casaco Puffer Vermelho">
-                <div class="slide-caption">Variedade de cores e tamanhos com parcelamento facilitado.</div>
+                <div class="slide-caption">Coleção Completa de Inverno: Parcele tudo em até 10x sem juros!</div>
             </div>
 
             <div class="slide">
                 <img src="img2_2.jpg" alt="Informações de Contato">
-                <div class="slide-caption">Fale Conosco: Rua João Mariano, 182 - Centro - Itanhaém.</div>
+                <div class="slide-caption">Fale Conosco pelos Telefones: (13) 99781-8935 ou (13) 3422-5987.</div>
             </div>
 
         </div>
 
-        <!-- Botões de controle -->
+        <!-- Botões de controle manual -->
         <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
         <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
     </div>
@@ -272,39 +402,48 @@
     <!-- Indicadores de posição (Dots) -->
     <div class="carousel-dots" id="carouselDots"></div>
 
-    <!-- Conteúdo Principal e CTAs Estratégicos -->
+    <!-- CONTEÚDO CENTRAL E ACESSOS PRINCIPAIS -->
     <div class="main-content">
-        <h2>O que você procura hoje?</h2>
-        <p>Escolha uma das opções abaixo para ser atendido agora mesmo pela nossa equipe no WhatsApp. Enviamos fotos de modelos disponíveis no seu tamanho!</p>
+        <h2>Atendimento Rápido no Balcão Digital</h2>
+        <p>Clique em uma das opções abaixo para falar diretamente com a nossa equipe. Facilitamos suas compras, enviamos fotos de numerações disponíveis e consultamos seu crediário na hora!</p>
 
         <div class="grid-actions">
             <div class="action-card">
-                <h3>Comprar pelo WhatsApp</h3>
-                <p>Gostou de algum modelo do carrossel? Chame um vendedor e consulte a disponibilidade do seu número.</p>
-                <a href="https://wa.me/5513997818935?text=Olá,%20vi%20o%20catálogo%20e%20gostaria de%20ver%20modelos" class="btn-cta" target="_blank">Chamar Vendedor</a>
+                <h3>Comprar via WhatsApp</h3>
+                <p>Viu algum produto no carrossel ou quer consultar um tamanho? Fale agora com um de nossos vendedores.</p>
+                <a href="https://wa.me/5513997818935?text=Olá,%20gostaria%20de%20atendimento%20para%20ver%20modelos%20de%20calçados" class="btn-cta" target="_blank">Chamar Vendedor</a>
             </div>
 
             <div class="action-card">
-                <h3>Crediário e Carnê</h3>
-                <p>Consulte seu limite, aprove um novo cadastro ou renegocie parcelas sem juros de forma rápida.</p>
-                <a href="https://wa.me/5513997818935?text=Olá,%20gostaria%20de%20saber%20sobre%20meu%20crediário" class="btn-cta btn-secondary" target="_blank">Acessar Portal Carnê</a>
+                <h3>Crediário e Carnês</h3>
+                <p>Consulte seu limite de compras, abra um novo carnê ou regularize parcelas em atraso sem juros.</p>
+                <a href="https://wa.me/5513997818935?text=Olá,%20gostaria%20de%20renegociar%20ou%20consultar%20meu%20crediário" class="btn-cta btn-secondary" target="_blank">Portal do Carnê</a>
             </div>
         </div>
     </div>
 
+    <!-- RECURSO MANTIDO: BOTÃO FLUTUANTE DO WHATSAPP FIXO COM BADGE -->
+    <a href="https://wa.me/5513997818935?text=Olá,%20estou%20no%20site%20e%20gostaria%20de%20tirar%20uma%20dúvida" class="whatsapp-floating" target="_blank" title="Fale Conosco pelo WhatsApp">
+        <span class="floating-badge">Online</span>
+        <svg viewBox="0 0 32 32">
+            <path d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-2.5A13 13 0 1 0 16 2zm0 24a11 11 0 0 1-5.6-1.5l-.4-.2-4.6 1.5 1.5-4.5-.3-.4A11 11 0 1 1 16 26zm6-8.2c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1a8.2 8.2 0 0 1-2.5-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6.2-.1.3-.3.5-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.5-.4-.7-.4h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.5 6.5 0 0 0 1.4 3.5A14.6 14.6 0 0 0 14 22.3a11.3 11.3 0 0 0 3.8.3 3.5 3.5 0 0 0 2.3-1.6 2.9 2.9 0 0 0 .2-1.6c-.1-.2-.3-.3-.6-.5z"/>
+        </svg>
+    </a>
+
+    <!-- RODAPÉ -->
     <footer>
         <p>&copy; O Feirão do Sapato - Rua João Mariano, 182 - Centro - Itanhaém/SP</p>
         <p>Desenvolvido por ED Art & Mídia</p>
     </footer>
 
-    <!-- Script de Funcionamento NATIVO e LEVE do Carrossel -->
+    <!-- LÓGICA DO CARROSSEL NATIVO -->
     <script>
         let currentIdx = 0;
         const slides = document.getElementById('carouselSlides');
         const slideCount = document.querySelectorAll('.slide').length;
         const dotsContainer = document.getElementById('carouselDots');
 
-        // Gerar os pontinhos dinamicamente
+        // Geração automática dos pontinhos indicadores
         for (let i = 0; i < slideCount; i++) {
             const dot = document.createElement('span');
             dot.classList.add('dot');
@@ -338,7 +477,7 @@
             updateCarousel();
         }
 
-        // Rotação automática a cada 5 segundos
+        // Passagem automática contínua (A cada 5 segundos)
         setInterval(() => {
             moveSlide(1);
         }, 5000);
