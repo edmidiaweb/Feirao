@@ -25,7 +25,7 @@
             background-color: var(--light-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding-bottom: 60px; /* Evita que o botão flutuante cubra conteúdo no mobile */
+            padding-bottom: 80px; /* Margem de segurança para o widget flutuante no mobile */
         }
 
         /* Topo da Página / Identidade */
@@ -267,11 +267,59 @@
             background-color: #333;
         }
 
-        /* BOTÃO FLUTUANTE DO WHATSAPP FIXO */
-        .whatsapp-floating {
+        /* SEÇÃO DE DEPOIMENTOS (PROVA SOCIAL) */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        @media(max-width: 600px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
+        .testimonial-card {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .testimonial-stars {
+            color: var(--secondary-color);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-text {
+            font-size: 13.5px;
+            color: #444;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .testimonial-author {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        /* CHATBOT FLUTUANTE ADAPTADO */
+        .chat-widget {
             position: fixed;
             bottom: 25px;
             right: 25px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .whatsapp-floating {
             background-color: var(--whatsapp-color);
             color: white;
             width: 60px;
@@ -281,13 +329,15 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 999;
-            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            position: relative;
             transition: all 0.3s ease;
         }
 
         .whatsapp-floating:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.1);
             background-color: #128c7e;
         }
 
@@ -297,7 +347,6 @@
             fill: white;
         }
 
-        /* Alerta Dinâmico sobre o Botão Flutuante */
         .floating-badge {
             position: absolute;
             top: -5px;
@@ -312,10 +361,107 @@
             animation: pulse 2s infinite;
         }
 
+        .chat-box {
+            width: 320px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 2px solid var(--primary-color);
+            display: none;
+            flex-direction: column;
+        }
+
+        .chat-box.active {
+            display: flex;
+            animation: chatFadeInUp 0.4s ease;
+        }
+
+        .chat-header {
+            background-color: var(--primary-color);
+            padding: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .chat-header-icon {
+            width: 30px;
+            height: 30px;
+            fill: var(--secondary-color);
+        }
+
+        .chat-body {
+            padding: 15px;
+            max-height: 220px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #fafafa;
+        }
+
+        .chat-msg {
+            background-color: #ebebeb;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            max-width: 90%;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .chat-msg.typing {
+            color: #777;
+            font-style: italic;
+            display: none;
+            background-color: transparent;
+            padding: 0 10px;
+        }
+
+        .chat-options {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background-color: var(--light-color);
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-btn {
+            background-color: white;
+            color: var(--dark-color);
+            border: 1px solid #ccc;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-align: left;
+            font-weight: bold;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
+        }
+
+        @keyframes chatFadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
@@ -337,7 +483,7 @@
         <p>A maior variedade de Itanhaém direto no seu celular</p>
     </header>
 
-    <!-- RECURSO MANTIDO: IMAGEM FIXA DA FACHADA NO TOPO (HERO BANNER) -->
+    <!-- BANNER FIXO DA FACHADA NO TOPO (HERO BANNER) -->
     <div class="top-hero-banner">
         <img src="img.jpg" alt="Fachada O Feirão do Sapato">
         <div class="top-hero-overlay">
@@ -348,7 +494,7 @@
     <!-- TÍTULO DA VITRINE -->
     <div class="carousel-section-title">Confira Nossos Destaques e Ofertas</div>
 
-    <!-- RECURSO ATUALIZADO: CARROSSEL DE PRODUTOS/CARNÊS -->
+    <!-- CARROSSEL DE PRODUTOS/CARNÊS -->
     <div class="carousel-container">
         <div class="carousel-slides" id="carouselSlides">
             
@@ -364,7 +510,7 @@
 
             <div class="slide">
                 <img src="img4.jpg" alt="Portal de Parcelas e Crediário">
-                <div class="slide-caption">Facilidade no carnê! Parcelas em atraso? Renegocie sem juros direto pelo WhatsApp.</div>
+                <div class="slide-caption">Facilidade no carnê! Parcelas indevidas ou em atraso? Renegocie sem juros direto pelo WhatsApp.</div>
             </div>
 
             <div class="slide">
@@ -422,13 +568,75 @@
         </div>
     </div>
 
-    <!-- RECURSO MANTIDO: BOTÃO FLUTUANTE DO WHATSAPP FIXO COM BADGE -->
-    <a href="https://wa.me/5513997818935?text=Olá,%20estou%20no%20site%20e%20gostaria%20de%20tirar%20uma%20dúvida" class="whatsapp-floating" target="_blank" title="Fale Conosco pelo WhatsApp">
-        <span class="floating-badge">Online</span>
-        <svg viewBox="0 0 32 32">
-            <path d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-2.5A13 13 0 1 0 16 2zm0 24a11 11 0 0 1-5.6-1.5l-.4-.2-4.6 1.5 1.5-4.5-.3-.4A11 11 0 1 1 16 26zm6-8.2c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1a8.2 8.2 0 0 1-2.5-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6.2-.1.3-.3.5-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.5-.4-.7-.4h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.5 6.5 0 0 0 1.4 3.5A14.6 14.6 0 0 0 14 22.3a11.3 11.3 0 0 0 3.8.3 3.5 3.5 0 0 0 2.3-1.6 2.9 2.9 0 0 0 .2-1.6c-.1-.2-.3-.3-.6-.5z"/>
-        </svg>
-    </a>
+    <!-- SEÇÃO ATUALIZADA: PROVA SOCIAL DE QUEM JÁ COMPRA E CONFIA -->
+    <div class="main-content">
+        <h2>Quem Compra, Recomenda</h2>
+        <p>Veja o que os nossos clientes dizem sobre a experiência no Feirão do Sapato:</p>
+        
+        <div class="testimonials-grid">
+            <!-- DEPOIMENTO 1: Foco em Concorrência e Facilidade -->
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Minha experiência com a loja foi ótima! Ótimas vendedoras... Está melhor do que a Kallan tanto nos preços quanto no atendimento e o crediário é rápido e fácil!"</p>
+                <p class="testimonial-author">Carla Fernanda Lores</p>
+            </div>
+
+            <!-- DEPOIMENTO 2: Foco em Eliminação de Objeção de Crédito -->
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Preço ótimo, aprova rápido pra comprar no carnê mesmo tendo nome sujo e não tem juros."</p>
+                <p class="testimonial-author">Adrieli Brasil</p>
+            </div>
+
+            <!-- DEPOIMENTO 3: Foco em Autoridade Regional -->
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Ótima, melhor loja de calçados de Itanhaém."</p>
+                <p class="testimonial-author">Graciene Pontes</p>
+            </div>
+
+            <!-- DEPOIMENTO 4: Foco em Atendimento Geral -->
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Atendimento excelente, ótimos preços, parabéns."</p>
+                <p class="testimonial-author">Gilson Cruz</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHATBOT FLUTUANTE ADAPTADO -->
+    <div class="chat-widget">
+        <!-- Caixa de Mensagens do Assistente -->
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <svg class="chat-header-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+                </svg>
+                <div>
+                    <p style="margin:0; font-size:14px; font-weight:bold;">Balcão Digital Feirão</p>
+                    <p style="margin:0; font-size:11px; opacity: 0.9;">Respondemos na hora</p>
+                </div>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="chat-msg">Olá! Bem-vindo ao Feirão do Sapato. Escolha o serviço que você precisa para ser direcionado ao atendente certo: 👟</div>
+                <div class="chat-msg typing" id="typingIndicator">Digitando...</div>
+            </div>
+            <div class="chat-options">
+                <button class="chat-btn" onclick="selectOption('Modelos')">👟 Ver Modelos e Numeração</button>
+                <button class="chat-btn" onclick="selectOption('Crediario')">💳 Consultar Limite / Carnê Novo</button>
+                <button class="chat-btn" onclick="selectOption('Atrasos')">💸 Regularizar Parcelas sem Juros</button>
+                <button class="chat-btn" onclick="selectOption('Horarios')">📍 Endereço e Horário da Loja</button>
+            </div>
+        </div>
+        
+        <!-- Botão Disparador Principal -->
+        <button class="whatsapp-floating" onclick="toggleChat()" title="Atendimento Feirão do Sapato">
+            <span class="floating-badge">Online</span>
+            <svg viewBox="0 0 32 32">
+                <path d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-2.5A13 13 0 1 0 16 2zm0 24a11 11 0 0 1-5.6-1.5l-.4-.2-4.6 1.5 1.5-4.5-.3-.4A11 11 0 1 1 16 26zm6-8.2c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1a8.2 8.2 0 0 1-2.5-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6.2-.1.3-.3.5-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.5-.4-.7-.4h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.5 6.5 0 0 0 1.4 3.5A14.6 14.6 0 0 0 14 22.3a11.3 11.3 0 0 0 3.8.3 3.5 3.5 0 0 0 2.3-1.6 2.9 2.9 0 0 0 .2-1.6c-.1-.2-.3-.3-.6-.5z"/>
+            </svg>
+        </button>
+    </div>
 
     <!-- RODAPÉ -->
     <footer>
@@ -481,6 +689,46 @@
         setInterval(() => {
             moveSlide(1);
         }, 5000);
+
+        // LÓGICA DE COMPORTAMENTO DO CHATBOT RETALHISTA
+        function toggleChat() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.classList.toggle('active');
+            const badge = document.querySelector('.floating-badge');
+            if (badge) {
+                badge.style.display = 'none';
+            }
+        }
+
+        function selectOption(flow) {
+            const typing = document.getElementById('typingIndicator');
+            typing.style.display = 'block';
+            
+            let targetText = "";
+            
+            switch(flow) {
+                case 'Modelos':
+                    targetText = "Olá! Vi a vitrine do site e gostaria de atendimento para ver modelos disponíveis e numerações.";
+                    break;
+                case 'Crediario':
+                    targetText = "Olá! Gostaria de consultar as condições para abrir um carnê ou verificar meu limite atual de compras.";
+                    break;
+                case 'Atrasos':
+                    targetText = "Olá! Tenho parcelas em aberto no meu carnê e gostaria de renegociar os valores sem juros.";
+                    break;
+                case 'Horarios':
+                    targetText = "Olá! Gostaria de confirmar os horários de funcionamento de hoje da loja no Centro de Itanhaém.";
+                    break;
+                default:
+                    targetText = "Olá! Estou navegando no site e tenho uma dúvida geral.";
+            }
+            
+            setTimeout(() => {
+                typing.style.display = 'none';
+                const whatsappUrl = `https://wa.me/5513997818935?text=${encodeURIComponent(targetText)}`;
+                window.open(whatsappUrl, '_blank');
+            }, 700);
+        }
     </script>
 </body>
 </html>
